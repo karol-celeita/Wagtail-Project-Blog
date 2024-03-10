@@ -27,18 +27,31 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
 
         {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        {% include "components/head.html" %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+            <!--loading -->
+            <div class="loading">
+                <div class="circle"></div>
+            </div>
+            {% include "components/navbar.html" %}
+            <!--/-->
+
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
+        {% include "components/footer.html" %}
+        {% include "components/search.html" %}
+        
 
+        
         {# Global javascript #}
+        
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
-
+        {% include "components/scripts.html" %}
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
