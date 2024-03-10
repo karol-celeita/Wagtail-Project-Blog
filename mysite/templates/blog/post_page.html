@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
+{% load blogapp_tags %}
+
 {% block content %}
 <!--post-default-->
 <section class="section pt-55 ">
@@ -171,21 +173,12 @@
                     <div class="post-single-footer">
                         <div class="tags">
                             <ul class="list-inline">
+                                {% for tag in page.tags.all %}
                                 <li>
-                                    <a href="blog-grid.html">Travel</a>
+                                    <a href="blog-grid.html">{{tag}}</a>
                                 </li>
-                                <li>
-                                    <a href="blog-grid.html">Nature</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid.html">tips</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid.html">forest</a>
-                                </li>
-                                <li>
-                                    <a href="blog-grid.html">beach</a>
-                                </li>
+                                {% endfor %}
+    
 
                             </ul>
                         </div>
@@ -229,9 +222,9 @@
 
 
 
-
-                {% include "components/main_categories.html" %}
-                {% include "components/main_tags.html" %}
+                {% post_categories_list %}
+                {% post_tag_list %}
+                
 
 
 
