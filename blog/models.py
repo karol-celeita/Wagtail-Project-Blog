@@ -6,6 +6,9 @@ from taggit.models import Tag as TaggitTag
 from modelcluster.models import ParentalKey
 from taggit.models import TaggedItemBase
 from modelcluster.tags import ClusterTaggableManager
+from .block import Body_block
+from wagtail.fields import StreamField
+
 
 class Blogpage (Page):
     description = models.CharField(max_length=250, blank=True)   
@@ -18,18 +21,19 @@ class Blogpage (Page):
 class PostPage (Page):
     header_image = models.ForeignKey ("wagtailimages.Image", on_delete = models.SET_NULL, null=True, blank=True, related_name="+")
     tags = ClusterTaggableManager(through="PostPageTags", blank=True)
-    
+    body = StreamField(Body_block(), blank=True)
+ 
     content_panels = Page.content_panels + [
         FieldPanel("header_image"),
         FieldPanel("tags"),
         InlinePanel("categories", label="Category"),
+        FieldPanel("body"),
     ]
     
 
 class PostPageBlogCategory(models.Model):
     Page = ParentalKey("blog.PostPage", on_delete=models.CASCADE, blank=True, related_name="categories")
     blog_category = models.ForeignKey("BlogCategory", blank=True, on_delete=models.CASCADE, related_name="post_pages")
-    
     panels = [
         FieldPanel("blog_category")
     ]
