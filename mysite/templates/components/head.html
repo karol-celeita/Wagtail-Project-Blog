@@ -17,3 +17,7 @@
 <!-- main style -->
 <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+{% if page.canonical_url %}
+<link rel="canonical" href="{{ page.canonical_url}}">
+{% endif %}

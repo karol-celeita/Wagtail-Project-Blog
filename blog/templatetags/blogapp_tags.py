@@ -41,3 +41,19 @@ def post_categories_list(context):
         "request":context["request"],
         "post_categories": post_categories
     }
+
+
+@register.simple_tag()
+def post_page_date_slug_url(postpage, blogpage):
+    post_date = postpage.post_date
+    url = blogpage.full_url + blogpage.reverse_subpage(
+        "post_by_date_slug",
+        args = (
+            post_date.year,
+            "{0:02}".format(post_date.month),
+            "{0:02}".format(post_date.day),
+            postpage.slug,
+        )
+    )
+    
+    return url

@@ -21,7 +21,7 @@
                         <div class="post-card">
                             <div class="post-card-image">
                                 {% if post.header_image %}
-                                <a href="{% pageurl post %}">
+                                <a href="{% post_page_date_slug_url post blogpage %}">
                                     {% image post.header_image original as header_image %}
                                     <img src="{{header_image.url}}" alt="">
                                 </a>
@@ -30,7 +30,7 @@
                             <div class="post-card-content">
                                 <a href="blog-grid.html" class="categorie">Food</a>
                                 <h5>
-                                    <a href="{% pageurl post %}">{{post.title}}</a>
+                                    <a href="{% post_page_date_slug_url post blogpage %}">{{post.title}}</a>
                                 </h5>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                     Odit quam atque ipsa laborum sunt distinctio...</p>
