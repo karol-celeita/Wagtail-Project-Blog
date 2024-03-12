@@ -13,7 +13,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 import datetime
 from django.http import Http404
 from django.utils.functional import cached_property
-
+from wagtail.search import index
 
 class Blogpage (RoutablePageMixin,Page):
     description = models.CharField(max_length=250, blank=True)   
@@ -64,11 +64,15 @@ class Blogpage (RoutablePageMixin,Page):
  
     @route(r'^tag/(?P<tag>[-\w]+)/$')
     def post_by_tag (self, request, tag):
+        self.filter_term = tag
+        self.filter_type = "tag"
         self.posts = self.get_posts().filter(tags__slug = tag )
         return self.render(request)
     
     @route(r'^category/(?P<category>[-\w]+)/$')
     def post_by_category(self, request, category):
+        self.filter_term = category
+        self.filter_type = "category"
         self.posts = self.get_posts().filter(categories__blog_category__slug = category )
         return self.render(request)
     
@@ -76,6 +80,18 @@ class Blogpage (RoutablePageMixin,Page):
     def post_list (self, request):
         self.posts = self.get_posts()
         return self.render(request)
+    
+    
+    @route(r'^search/$')
+    def post_search(self, request):
+        search_query = request.GET.get('q', None)
+        self.posts = self.get_posts()
+        if search_query:
+            self.filter_term = search_query
+            self.filter_type = "search"
+            self.posts = self.posts.search(search_query)
+        return self.render(request)
+        
          
 
 class PostPage (Page):
@@ -93,6 +109,11 @@ class PostPage (Page):
     
     settings_panels = Page.settings_panels + [
         FieldPanel("post_date"),
+    ]
+    
+    search_fields = Page.search_fields + [
+        index.SearchField("body"),
+        index.SearchField("title"),
     ]
     
     def get_context(self, request, *args, **kwargs):

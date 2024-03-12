@@ -8,6 +8,20 @@
 {% block content %}
 
 <!--blog-grid-->
+{% if page.filter_type %}
+<section class="categorie-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="categorie-title"> 
+                    <h3>Results {{page.filter_type}} : <span> {{page.filter_term}}</span></h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <section class="blog-grid">
     <div class="container-fluid">

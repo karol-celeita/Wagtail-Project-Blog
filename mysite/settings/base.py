@@ -48,7 +48,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-
+WAGTAILSEARCH_BACKENDS = {
+    'default':{
+        'BACKEND':'wagtail.contrib.postgres_search.backend',
+    }
+}
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
