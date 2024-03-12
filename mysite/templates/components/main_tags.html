@@ -1,3 +1,4 @@
+{% load wagtailroutablepage_tags %}
 <div class="widget">
     <div class="section-title">
         <h5>Tags</h5>
@@ -6,7 +7,7 @@
         <ul class="list-inline">
             {% for tag in tags %}
             <li>
-                <a href="blog-grid.html">{{tag.name}}</a>
+                <a href="{% routablepageurl blogpage 'post_by_tag' tag.slug %}">{{tag.name}}</a>
             </li>
             {% endfor %}
 
