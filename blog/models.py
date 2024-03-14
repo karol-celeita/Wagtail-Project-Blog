@@ -16,7 +16,7 @@ from django.utils.functional import cached_property
 from wagtail.search import index
 from django.shortcuts import render, redirect
 from wagtail.contrib.forms.models import AbstractForm, AbstractFormField
-
+from wagtailmetadata.models import MetadataPageMixin
 
 class FormField(AbstractFormField):
     page = ParentalKey("FormPage", on_delete=models.CASCADE, related_name="form_fields")
@@ -115,7 +115,7 @@ class Blogpage (RoutablePageMixin,Page):
         
          
 
-class PostPage (Page):
+class PostPage (MetadataPageMixin, Page):
     header_image = models.ForeignKey ("wagtailimages.Image", on_delete = models.SET_NULL, null=True, blank=True, related_name="+")
     tags = ClusterTaggableManager(through="PostPageTags", blank=True)
     body = StreamField(Body_block(), blank=True)

@@ -1,0 +1,24 @@
+{%load crispy_forms_tags comments %}
+
+<div class="title">
+    <h5>Leave a Reply</h5>
+</div>
+<form class="widget-form" action="{% comment_form_target %}?next={{form.target.object.url}}" method="POST">
+    <p>Your email adress will not be published ,Requied fileds are marked*.</p>
+    <div class="alert alert-success contact_msg" style="display: none" role="alert">
+        Your message was sent successfully.
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {% csrf_token %}
+                {{form|crispy}}
+            </div>
+        </div>
+        <input type="hidden" name="next" value="{{form.target.object.url}}" >
+        
+        <div class="col-12">
+            <input type="submit" name="POST" class="btn-custom" value="POST" >
+        </div>
+    </div>
+</form>

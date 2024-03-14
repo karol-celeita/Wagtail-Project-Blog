@@ -1,0 +1,15 @@
+{%for comment in comment_list %}
+<li class="comment-item">
+    <img src="assets/img/user/1.jpg" alt="">
+    <div class="content">
+        <ul class="info list-inline">
+            <li>{{ comment.name }}</li>
+            <li class="dot"></li>
+            <li> {{ comment.submit_date }}</li>
+        </ul>
+        <p> {{ comment.comment }}
+        </p>
+    </div>
+</li>
+
+{% endfor %}

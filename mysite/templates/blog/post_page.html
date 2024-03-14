@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags comments %}
 {% load static %}
 {% load blogapp_tags %}
 
@@ -86,7 +86,17 @@
 
 
                 <!--widget-comments-->
-                {% include "components/comments.html" %}
+
+                <div class="widget mb-50">
+
+                    <ul class="widget-comments">
+                        {% render_comment_list for page %}
+                    </ul>
+                    <!--Leave-comments-->
+                        {% render_comment_form for page %}
+                </div>
+
+
             </div>
             <div class="col-lg-4 max-width">
 

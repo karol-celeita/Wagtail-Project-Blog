@@ -50,8 +50,16 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "wagtailmenus",
+    "wagtailmetadata",
+    "django.contrib.sitemaps",
+    "django_comments",
+    "django.contrib.sites",
+    "custom_comments",
 
 ]
+
+SITE_ID = 1
+COMMENTS_APP = "custom_comments"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -188,3 +196,5 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
