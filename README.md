@@ -7,8 +7,8 @@ Este es un proyecto realizado con Wagtail 6.0 y Django 5.0 que realiza un blog c
 Ejecuta el requeriments.txt instalando las respectivas librerias en tu entorno virtual
 Ejecuta el comando:
 
-    python manage.py createsueruser
-    pyton manage,py migrate
+    python manage.py createsuperuser
+    pyton manage.py migrate
     python manage.py runserver
 
 
